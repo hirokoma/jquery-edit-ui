@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>jQuery Editor</title>
+<style>
+.syncer-acdn-child {
+  display: none ;
+}
+</style>
+
+</head>
+<body>
+
+<h2>選択してください</h2>
+<ul>
+  <li><p><a class="syncer-acdn syncer-0001" data-target="0001">宛先</a></p>
+    <ul id="acdn-0001" class="syncer-acdn-child">
+      <li><input type="radio" class="candidate" name="0001" data-target="0001"/><span>株式会社XYZ 田中様</span></li>
+      <li><input type="radio" class="candidate" name="0001" data-target="0001"/><span>株式会社ABC 佐藤様</span></li>
+      <li><input type="radio" class="candidate" name="0001" data-target="0001"/><span>海馬コーポレーション 海馬様</span></li>
+    </ul>
+  </li>
+  <li><p><a class="syncer-acdn syncer-0002" data-target="0002">あいさつ</a></p>
+    <ul id="acdn-0002" class="syncer-acdn-child">
+      <li><input type="radio" class="candidate" name="0002" data-target="0002"/><span>お世話になっております。渡辺です。</span></li>
+      <li><input type="radio" class="candidate" name="0002" data-target="0002"/><span>お疲れ様です。渡辺です。</span></li>
+      <li><input type="radio" class="candidate" name="0002" data-target="0002"/><span>お久ぶりです。渡辺です。</span></li>
+    </ul>
+  </li>
+  <li><p><a class="syncer-acdn syncer-0003" data-target="0003">結び</a></p>
+    <ul id="acdn-0003" class="syncer-acdn-child">
+      <li><input type="radio" class="candidate" name="0003" data-target="0003"/><span>以上、よろしくお願い致します。</span></li>
+      <li><input type="radio" class="candidate" name="0003" data-target="0003"/><span>それでは、失礼致します。</span></li>
+      <li><input type="radio" class="candidate" name="0003" data-target="0003"/><span>今後ともよろしくお願い致します。</span></li>
+    </ul>
+  </li>
+</ul>
+
+<hr>
+<h2>編集してください</h2>
+
+<div class="editarea" contenteditable="true" style="width: 500px; height:100px; border: 1px solid gray; border-radius: 5px; padding: 5px;" id="textarea-0001"></div> <br>
+<div class="editarea" contenteditable="true" style="width: 500px; height:100px; border: 1px solid gray; border-radius: 5px; padding: 5px;" id="textarea-0002"></div> <br>
+<div class="editarea" contenteditable="true" style="width: 500px; height:100px; border: 1px solid gray; border-radius: 5px; padding: 5px;" id="textarea-0003"></div> <br>
+
+<hr>
+<h2>確認してください</h2>
+<div style="border: 1px solid gray; border-radius:5px; width: 500px; height: 300px;" id="result">
+</div>
+
+
+<script src="./js/jquery-3.1.1.min.js"></script>
+
+<script>
+
+$(function(){
+  $('.syncer-acdn').click( function(){
+    var target = $( this ).data( 'target' ) ;
+    $( '#acdn-' + target ).slideToggle(100);
+    return false ;
+  });
+
+  $('input:radio').change( function() {  
+    var text = $( this ).next('span:first').html();
+    var target = $( this ).data('target');
+    $('#textarea-' + target).html(text);
+    $('a.syncer-' + target).text(text);
+    $('#acdn-' + target ).slideToggle(100);
+    return false ;
+  });  
+});
+
+</script>
+</body>
+</html>
